@@ -1,89 +1,95 @@
 import React from 'react';
-import { Card } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
 import { Download, PieChart, BarChart, TrendingUp, Users } from 'lucide-react';
 
 export function Reports() {
   return (
     <div>
-      <div className="page-header">
-        <h1 className="page-title">Analytics & Reports</h1>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <Button variant="outline"><Download size={18} /> Export PDF</Button>
-          <Button variant="outline"><Download size={18} /> Export Excel</Button>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-xl font-bold text-gray-800">Analytics & Reports</h1>
+        <div className="flex items-center gap-3">
+          <button className="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <Download size={18} /> Export PDF
+          </button>
+          <button className="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <Download size={18} /> Export Excel
+          </button>
         </div>
       </div>
-      
-      {/* Quick Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-        <Card style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
-          <div style={{ padding: '12px', backgroundColor: '#dbeafe', borderRadius: '12px', color: 'var(--accent)' }}>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
+        <div className="bg-white rounded-3xl p-6 shadow-sm flex items-center gap-4">
+          <div className="p-3 bg-blue-100 rounded-xl text-blue-600">
             <Users size={24} />
           </div>
           <div>
-            <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: 500 }}>Total Students</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-heading)' }}>2,845</div>
+            <div className="text-sm text-gray-400 font-medium">Total Students</div>
+            <div className="text-2xl font-bold text-gray-800">2,845</div>
           </div>
-        </Card>
-        <Card style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
-          <div style={{ padding: '12px', backgroundColor: '#dcfce7', borderRadius: '12px', color: 'var(--success)' }}>
+        </div>
+        <div className="bg-white rounded-3xl p-6 shadow-sm flex items-center gap-4">
+          <div className="p-3 bg-green-100 rounded-xl text-green-500">
             <TrendingUp size={24} />
           </div>
           <div>
-            <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: 500 }}>Avg Completion Rate</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-heading)' }}>87%</div>
+            <div className="text-sm text-gray-400 font-medium">Avg Completion Rate</div>
+            <div className="text-2xl font-bold text-gray-800">87%</div>
           </div>
-        </Card>
+        </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-        <Card>
-          <div className="card-header">
-            <h3 className="card-title">Course Performance</h3>
-            <BarChart className="text-muted" size={20} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-3xl p-6 shadow-sm">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-bold text-gray-800">Course Performance</h3>
+            <BarChart className="text-gray-400" size={20} />
           </div>
-          {/* Professional CSS Bar Chart */}
-          <div style={{ height: '250px', display: 'flex', alignItems: 'flex-end', gap: '15%', padding: '20px 0', borderBottom: '1px solid var(--border-color)', margin: '0 20px' }}>
-            <div style={{ width: '25%', height: '40%', backgroundColor: 'var(--accent)', borderRadius: '4px 4px 0 0', position: 'relative' }}>
-               <span style={{ position: 'absolute', top: '-24px', width: '100%', textAlign: 'center', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>40%</span>
+          <div className="flex items-end gap-[15%] h-[250px] pb-5 border-b border-gray-100 mx-0">
+            <div className="w-1/4 h-[40%] bg-blue-500 rounded-t relative">
+              <span className="absolute -top-6 w-full text-center text-xs font-semibold text-gray-400">40%</span>
             </div>
-            <div style={{ width: '25%', height: '75%', backgroundColor: 'var(--primary)', borderRadius: '4px 4px 0 0', position: 'relative' }}>
-               <span style={{ position: 'absolute', top: '-24px', width: '100%', textAlign: 'center', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>75%</span>
+            <div className="w-1/4 h-[75%] bg-indigo-500 rounded-t relative">
+              <span className="absolute -top-6 w-full text-center text-xs font-semibold text-gray-400">75%</span>
             </div>
-            <div style={{ width: '25%', height: '90%', backgroundColor: 'var(--success)', borderRadius: '4px 4px 0 0', position: 'relative' }}>
-               <span style={{ position: 'absolute', top: '-24px', width: '100%', textAlign: 'center', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>90%</span>
+            <div className="w-1/4 h-[90%] bg-green-500 rounded-t relative">
+              <span className="absolute -top-6 w-full text-center text-xs font-semibold text-gray-400">90%</span>
             </div>
-            <div style={{ width: '25%', height: '60%', backgroundColor: 'var(--warning)', borderRadius: '4px 4px 0 0', position: 'relative' }}>
-               <span style={{ position: 'absolute', top: '-24px', width: '100%', textAlign: 'center', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>60%</span>
+            <div className="w-1/4 h-[60%] bg-amber-400 rounded-t relative">
+              <span className="absolute -top-6 w-full text-center text-xs font-semibold text-gray-400">60%</span>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '16px', fontSize: '0.85rem', fontWeight: 500 }}>
-            <span style={{ color: 'var(--text-heading)' }}>CS101</span>
-            <span style={{ color: 'var(--text-heading)' }}>ENG202</span>
-            <span style={{ color: 'var(--text-heading)' }}>MAT301</span>
-            <span style={{ color: 'var(--text-heading)' }}>PHY101</span>
+          <div className="flex justify-around mt-4 text-sm font-medium">
+            <span className="text-gray-800">CS101</span>
+            <span className="text-gray-800">ENG202</span>
+            <span className="text-gray-800">MAT301</span>
+            <span className="text-gray-800">PHY101</span>
           </div>
-        </Card>
+        </div>
 
-        <Card>
-          <div className="card-header">
-            <h3 className="card-title">Student Demographics</h3>
-            <PieChart className="text-muted" size={20} />
+        <div className="bg-white rounded-3xl p-6 shadow-sm">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-bold text-gray-800">Student Demographics</h3>
+            <PieChart className="text-gray-400" size={20} />
           </div>
-          {/* Professional CSS Pie Chart */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '220px', marginTop: '10px' }}>
-            <div style={{ 
-              width: '180px', height: '180px', borderRadius: '50%', 
-              background: 'conic-gradient(var(--accent) 0% 45%, var(--primary) 45% 75%, var(--success) 75% 100%)',
-              boxShadow: 'var(--shadow-sm)'
-            }}></div>
+          <div className="flex justify-center items-center h-[220px] mt-2">
+            <div
+              className="w-[180px] h-[180px] rounded-full shadow-sm"
+              style={{
+                background: 'conic-gradient(#3b82f6 0% 45%, #6366f1 45% 75%, #22c55e 75% 100%)'
+              }}
+            ></div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '24px', fontSize: '0.875rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', color: 'var(--text-main)' }}><span style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: 'var(--accent)', marginRight: '8px' }}></span> IT</div>
-            <div style={{ display: 'flex', alignItems: 'center', color: 'var(--text-main)' }}><span style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: 'var(--primary)', marginRight: '8px' }}></span> Business</div>
-            <div style={{ display: 'flex', alignItems: 'center', color: 'var(--text-main)' }}><span style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: 'var(--success)', marginRight: '8px' }}></span> Engineering</div>
+          <div className="flex justify-center gap-6 mt-6 text-sm">
+            <div className="flex items-center text-gray-800">
+              <span className="w-3 h-3 rounded-sm bg-blue-500 mr-2"></span> IT
+            </div>
+            <div className="flex items-center text-gray-800">
+              <span className="w-3 h-3 rounded-sm bg-indigo-500 mr-2"></span> Business
+            </div>
+            <div className="flex items-center text-gray-800">
+              <span className="w-3 h-3 rounded-sm bg-green-500 mr-2"></span> Engineering
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

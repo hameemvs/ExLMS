@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { Card } from '../components/ui/Card';
-import { Badge } from '../components/ui/Badge';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
 import { Search, Filter, DollarSign } from 'lucide-react';
 
 export function Payment() {
@@ -10,100 +6,113 @@ export function Payment() {
 
   return (
     <div>
-      <div className="page-header">
-        <h1 className="page-title">Payments</h1>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Payments</h1>
       </div>
-      
-      <div style={{ display: 'flex', gap: '24px', marginBottom: '24px', borderBottom: '1px solid var(--border-color)' }}>
-        <button 
+
+      <div className="bg-gray-100 p-1 rounded-xl inline-flex mb-6">
+        <button
           onClick={() => setActiveTab('fees')}
-          style={{ 
-            background: 'none', border: 'none', padding: '0 0 12px 0', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 500,
-            color: activeTab === 'fees' ? 'var(--accent)' : 'var(--text-muted)',
-            borderBottom: activeTab === 'fees' ? '2px solid var(--accent)' : '2px solid transparent',
-            marginBottom: '-1px'
-          }}
+          className={`px-4 py-2 text-sm transition-all rounded-lg ${
+            activeTab === 'fees'
+              ? 'bg-white shadow-sm text-gray-800 font-medium'
+              : 'text-gray-400 hover:text-gray-600'
+          }`}
         >
           Student Fees
         </button>
-        <button 
+        <button
           onClick={() => setActiveTab('salary')}
-          style={{ 
-            background: 'none', border: 'none', padding: '0 0 12px 0', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 500,
-            color: activeTab === 'salary' ? 'var(--accent)' : 'var(--text-muted)',
-            borderBottom: activeTab === 'salary' ? '2px solid var(--accent)' : '2px solid transparent',
-            marginBottom: '-1px'
-          }}
+          className={`px-4 py-2 text-sm transition-all rounded-lg ${
+            activeTab === 'salary'
+              ? 'bg-white shadow-sm text-gray-800 font-medium'
+              : 'text-gray-400 hover:text-gray-600'
+          }`}
         >
           Staff Salary
         </button>
       </div>
 
-      <Card style={{ padding: 0 }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ width: '300px', marginBottom: 0 }}>
-             {/* Use Input component but without wrapper margin by overriding style if needed, or just standard Input */}
-             <div className="input-container" style={{ margin: 0 }}>
-                <Search size={18} className="input-icon" />
-                <input className="input-field" placeholder="Search by name or ID..." />
-             </div>
+      <div className="bg-white rounded-3xl shadow-sm">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+          <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white w-72">
+            <Search size={16} className="text-gray-400" />
+            <input
+              className="outline-none flex-1 text-gray-800 placeholder-gray-400"
+              placeholder="Search by name or ID..."
+            />
           </div>
-          <Button variant="outline"><Filter size={16} /> Filter</Button>
+          <button className="px-3 py-1.5 border border-gray-200 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-colors flex items-center gap-1.5">
+            <Filter size={14} />
+            Filter
+          </button>
         </div>
 
         {activeTab === 'fees' ? (
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table className="w-full">
             <thead>
-              <tr style={{ backgroundColor: 'var(--bg-color)', borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                <th style={{ padding: '16px 24px', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>Student Name</th>
-                <th style={{ padding: '16px 24px', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>Course</th>
-                <th style={{ padding: '16px 24px', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>Amount</th>
-                <th style={{ padding: '16px 24px', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>Status</th>
-                <th style={{ padding: '16px 24px', textAlign: 'right' }}></th>
+              <tr className="border-b border-gray-100">
+                <th className="text-left text-xs font-semibold text-gray-400 uppercase py-4 px-6">Student Name</th>
+                <th className="text-left text-xs font-semibold text-gray-400 uppercase py-4 px-6">Course</th>
+                <th className="text-left text-xs font-semibold text-gray-400 uppercase py-4 px-6">Amount</th>
+                <th className="text-left text-xs font-semibold text-gray-400 uppercase py-4 px-6">Status</th>
+                <th className="py-4 px-6"></th>
               </tr>
             </thead>
             <tbody>
               {[1, 2, 3].map((i, index) => (
-                <tr key={i} style={{ borderBottom: index !== 2 ? '1px solid var(--border-color)' : 'none' }}>
-                  <td style={{ padding: '16px 24px', fontWeight: 500, color: 'var(--text-heading)' }}>John Doe {i}</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--text-muted)' }}>Software Engineering</td>
-                  <td style={{ padding: '16px 24px', fontWeight: 500 }}>LKR 50,000</td>
-                  <td style={{ padding: '16px 24px' }}>
-                    {i === 1 ? <Badge variant="success">Paid</Badge> : <Badge variant="danger">Outstanding</Badge>}
+                <tr key={i} className={index !== 2 ? 'border-b border-gray-100' : ''}>
+                  <td className="py-4 px-6 font-bold text-gray-800">John Doe {i}</td>
+                  <td className="py-4 px-6 text-sm text-gray-400">Software Engineering</td>
+                  <td className="py-4 px-6 font-bold text-gray-800">LKR 50,000</td>
+                  <td className="py-4 px-6">
+                    {i === 1 ? (
+                      <span className="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-full">Paid</span>
+                    ) : (
+                      <span className="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-1 rounded-full">Outstanding</span>
+                    )}
                   </td>
-                  <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    {i !== 1 && <Button variant="primary" style={{ padding: '6px 12px', fontSize: '0.85rem' }}>Pay Now</Button>}
-                    {i === 1 && <Button variant="outline" style={{ padding: '6px 12px', fontSize: '0.85rem' }}>Receipt</Button>}
+                  <td className="py-4 px-6 text-right">
+                    {i !== 1 && (
+                      <button className="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Pay Now
+                      </button>
+                    )}
+                    {i === 1 && (
+                      <button className="px-3 py-1.5 border border-gray-200 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-colors">
+                        Receipt
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <ul style={{ display: 'flex', flexDirection: 'column' }}>
+          <ul className="flex flex-col">
             {[1, 2].map((i, index) => (
-              <li key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 24px', borderBottom: index === 0 ? '1px solid var(--border-color)' : 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: 'var(--bg-color)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <DollarSign className="text-accent" size={24} />
+              <li key={i} className={`flex items-center justify-between px-6 py-5 ${index === 0 ? 'border-b border-gray-100' : ''}`}>
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <DollarSign size={24} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 600, color: 'var(--text-heading)', fontSize: '1.05rem', marginBottom: '4px' }}>Dr. Smith {i}</div>
-                    <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>June 2026 Salary • Computer Science Dept</div>
+                    <div className="font-bold text-gray-800 text-base mb-1">Dr. Smith {i}</div>
+                    <div className="text-sm text-gray-400">June 2026 Salary • Computer Science Dept</div>
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Amount</div>
-                    <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>LKR 150,000</div>
+                <div className="flex items-center gap-8">
+                  <div className="text-right">
+                    <div className="text-sm text-gray-400 mb-1">Amount</div>
+                    <div className="font-bold text-gray-800 text-lg">LKR 150,000</div>
                   </div>
-                  <Badge variant="success">Transferred</Badge>
+                  <span className="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-full">Transferred</span>
                 </div>
               </li>
             ))}
           </ul>
         )}
-      </Card>
+      </div>
     </div>
   );
 }

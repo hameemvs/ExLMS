@@ -1,16 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
-import { Header } from './Header';
-import './layout.css';
 
 export function Layout() {
   return (
-    <div className="app-container">
+    <div className="flex h-screen overflow-hidden bg-gray-100">
       <Sidebar />
-      <div className="main-content">
-        <Header />
-        <main className="page-content">
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+        <main className="flex-1 overflow-y-auto no-scrollbar p-6">
           <Outlet />
         </main>
       </div>

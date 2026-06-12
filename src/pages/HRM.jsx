@@ -1,82 +1,103 @@
 import React, { useState } from 'react';
-import { Card } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
-import { Badge } from '../components/ui/Badge';
 import { Plus, Users, Settings } from 'lucide-react';
 
 export function HRM() {
   const [activeTab, setActiveTab] = useState('directory');
 
+  const tabs = [
+    { key: 'directory', label: 'Staff Directory' },
+    { key: 'performance', label: 'Performance Reviews' },
+    { key: 'leave', label: 'Leave Requests' },
+    { key: 'roles', label: 'Roles & Permissions' },
+  ];
+
   return (
     <div>
-      <div className="page-header">
-        <h1 className="page-title">Human Resources</h1>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <Button variant="primary"><Plus size={18} /> Add Staff</Button>
-          <Button variant="outline"><Settings size={18} /> Manage Roles</Button>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-bold text-gray-800">Human Resources</h1>
+        <div className="flex gap-3">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <Plus size={18} /> Add Staff
+          </button>
+          <button className="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <Settings size={18} /> Manage Roles
+          </button>
         </div>
       </div>
-      
-      <div style={{ display: 'flex', gap: '24px', marginBottom: '32px', borderBottom: '1px solid var(--border-color)', overflowX: 'auto' }}>
-        {['directory', 'performance', 'leave', 'roles'].map(tab => (
-          <button 
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{ 
-              background: 'none', border: 'none', padding: '0 0 12px 0', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 500, textTransform: 'capitalize', whiteSpace: 'nowrap',
-              color: activeTab === tab ? 'var(--accent)' : 'var(--text-muted)',
-              borderBottom: activeTab === tab ? '2px solid var(--accent)' : '2px solid transparent',
-              marginBottom: '-1px'
-            }}
+
+      <div className="bg-gray-100 p-1 rounded-xl inline-flex mb-8">
+        {tabs.map(tab => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`px-4 py-2 text-sm transition-all rounded-lg ${
+              activeTab === tab.key
+                ? 'bg-white shadow-sm text-gray-800 font-medium'
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
           >
-            {tab === 'directory' ? 'Staff Directory' : tab === 'performance' ? 'Performance Reviews' : tab === 'leave' ? 'Leave Requests' : 'Roles & Permissions'}
+            {tab.label}
           </button>
         ))}
       </div>
 
       {activeTab === 'leave' && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-             <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-heading)' }}>Recent Leave Requests</h3>
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="text-lg font-bold text-gray-800">Recent Leave Requests</h3>
           </div>
-          <Card style={{ padding: 0 }}>
-            <ul style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="bg-white rounded-3xl shadow-sm">
+            <ul className="flex flex-col">
               {[1, 2, 3].map((i, index) => (
-                <li key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px', borderBottom: index !== 2 ? '1px solid var(--border-color)' : 'none' }}>
-                  <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--bg-color)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'var(--primary)' }}>
+                <li
+                  key={i}
+                  className={`flex items-center justify-between p-6 ${
+                    index !== 2 ? 'border-b border-gray-100' : ''
+                  }`}
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-blue-600">
                       <Users size={20} />
                     </div>
                     <div>
-                      <div style={{ fontWeight: 600, color: 'var(--text-heading)', fontSize: '1.05rem', marginBottom: '4px' }}>Dr. Alice Smith</div>
-                      <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Medical Leave • June 10 - June 14 (4 days)</div>
+                      <div className="font-bold text-gray-800 mb-1">Dr. Alice Smith</div>
+                      <div className="text-sm text-gray-400">Medical Leave • June 10 - June 14 (4 days)</div>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                    {i === 1 ? <Badge variant="success">Approved</Badge> : 
-                     i === 2 ? <Badge variant="warning">Pending</Badge> : 
-                     <Badge variant="danger">Denied</Badge>}
-                    
+                  <div className="flex items-center gap-6">
+                    {i === 1 && (
+                      <span className="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-full">Approved</span>
+                    )}
                     {i === 2 && (
-                      <div style={{ display: 'flex', gap: '8px' }}>
-                        <Button variant="outline" style={{ padding: '6px 12px', fontSize: '0.85rem', color: 'var(--success)', borderColor: 'var(--success)' }}>Approve</Button>
-                        <Button variant="outline" style={{ padding: '6px 12px', fontSize: '0.85rem', color: 'var(--danger)', borderColor: 'var(--danger)' }}>Deny</Button>
+                      <span className="bg-orange-50 text-orange-500 text-[10px] font-bold px-2 py-1 rounded-full">Pending</span>
+                    )}
+                    {i === 3 && (
+                      <span className="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-1 rounded-full">Denied</span>
+                    )}
+                    {i === 2 && (
+                      <div className="flex gap-2">
+                        <button className="px-3 py-1.5 border border-green-200 text-green-600 rounded-xl text-xs font-medium hover:bg-green-50 transition-colors">
+                          Approve
+                        </button>
+                        <button className="px-3 py-1.5 border border-red-200 text-red-500 rounded-xl text-xs font-medium hover:bg-red-50 transition-colors">
+                          Deny
+                        </button>
                       </div>
                     )}
                   </div>
                 </li>
               ))}
             </ul>
-          </Card>
+          </div>
         </div>
       )}
-      
+
       {activeTab !== 'leave' && (
-        <Card style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)' }}>
-          <Users size={48} className="text-muted" style={{ opacity: 0.5, marginBottom: '16px' }} />
-          <h3 style={{ marginBottom: '8px', color: 'var(--text-heading)' }}>No Data Available</h3>
-          <p>Please select the "Leave Requests" tab to view the active mockup content.</p>
-        </Card>
+        <div className="bg-white rounded-3xl p-6 shadow-sm text-center py-16">
+          <Users size={48} className="text-gray-300 mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-gray-800 mb-2">No Data Available</h3>
+          <p className="text-sm text-gray-400">Please select the "Leave Requests" tab to view the active mockup content.</p>
+        </div>
       )}
     </div>
   );
